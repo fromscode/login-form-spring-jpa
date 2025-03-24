@@ -8,13 +8,12 @@
 </head>
 <body>
 
-	New here?<a href="signup.jsp"> Sign Up</a>
-	<form action="verifyLogin" method="post">
+	<a href="/">Login</a><br>
+	
+	New here?<a href="signup"> Sign Up</a>
+	<form action="verifyEmail" method="post">
 		Email : <input type="text" name="email">
-		Password : <input type="text" name="password">
 		<input type="submit">
 	</form>
-	<br>
-	<a href="forgotPassword.jsp">Forgot Password?</a>
 </body>
 </html>

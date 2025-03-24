@@ -1,5 +1,7 @@
 package com.example.loginform.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +53,49 @@ public class HomeController {
 		}
 		
 		m.addAttribute("user", repo.save(user));
+		return "dashboard";
+	}
+	
+	@PostMapping("verifyEmail")
+	public String verifyEmail(@RequestParam String email, Model m) {
+		
+		Optional<User> optionalUser = repo.findById(email);
+		
+		if (optionalUser.isPresent()) {
+			m.addAttribute("user", optionalUser.get());
+			return "securityQuestion";
+		}
+		
+		return "userNotFound";
+	}
+	
+	@PostMapping("verifyAnswer")
+	public String verifyAnswer(@RequestParam String answer, @RequestParam String email, Model m) {
+		
+		User user = (User) repo.getReferenceById(email);
+		System.out.println(user.toString());
+		
+		if (user.getSecurityAnswer().equals(answer)) {
+			m.addAttribute("user", user);
+			return "updatePassword";
+		}
+		
+		return "securityAnswerWrong";
+	}
+	
+	@PostMapping("updatePassword")
+	public String updatePassword(@RequestParam String password, @RequestParam String confirmPassword, @RequestParam String email, Model m) {
+		
+		if (!password.equals(confirmPassword)) {
+			return "passwordsNotEqual";
+		}
+		
+		User user = (User) repo.getReferenceById(email);
+		
+		user.setPassword(password);
+		
+		m.addAttribute("user", repo.save(user));
+		
 		return "dashboard";
 	}
 }
