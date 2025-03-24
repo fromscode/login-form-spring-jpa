@@ -33,9 +33,14 @@ public class HomeController {
 	}
 	
 	@PostMapping("verifyLogin")
-	public String verifyLogin(@RequestParam String email, @RequestParam String password) {
+	public String verifyLogin(@RequestParam String email, @RequestParam String password, Model m) {
+		User user = repo.getReferenceById(email);
 		
-		return "";
+		if(user.getPassword().equals(password)) {
+			m.addAttribute("user", user);
+			return "dashboard";
+		}
+		return "failure";
 	}
 	
 	@PostMapping("addUser")
