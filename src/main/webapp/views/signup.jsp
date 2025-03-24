@@ -8,13 +8,21 @@
 </head>
 <body>
 
-	New here?<a href="signup.jsp"> Sign Up</a>
-	<form action="verifyLogin" method="post">
-		Email : <input type="text" name="email">
-		Password : <input type="text" name="password">
+	Already a user? <a href="/">Log in</a>
+	<form action="addUser" method="post">
+		Email : <input type="text" name="email"><br>
+		
+		Password : <input type="password" name="password"><br>
+		
+		Confirm Password : <input type="password" name="confirmPassword"><br>
+		
+		Security Question : <input type="text" name="securityQuestion"><br>
+		
+		Security Answer : <input type="text" name="securityAnswer"><br>
+		
+		Phone Number : <input type="text" name="phoneNumber"><br>
+		
 		<input type="submit">
 	</form>
-	<br>
-	<a href="forgotPassword.jsp">Forgot Password?</a>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	New here?<a href="signup"> Sign Up</a>
+	New here? <a href="signup">Sign Up</a>
 	<form action="verifyLogin" method="post">
 		Email : <input type="text" name="email">
 		Password : <input type="text" name="password">
