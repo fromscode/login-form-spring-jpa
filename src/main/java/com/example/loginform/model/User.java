@@ -2,18 +2,13 @@ package com.example.loginform.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 
 @Entity
 public class User {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
+	@Id
 	@Column(nullable = false)
 	private String email;
 	
@@ -31,15 +26,6 @@ public class User {
 	
 	@Column(nullable = false)
 	private String phoneNumber;
-	
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;
@@ -89,21 +75,11 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public User(Long id, String email, String password, String securityQuestion,String securityAnswer, String phoneNumber, String confirmPassword) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
-		this.phoneNumber = phoneNumber;
-		this.confirmPassword = confirmPassword;
-	}
-
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", password=" + password + ", securityQuestion="
-				+ securityQuestion + ", phoneNumber=" + phoneNumber + "]";
+		return "User [email=" + email + ", password=" + password + ", confirmPassword=" + confirmPassword
+				+ ", securityQuestion=" + securityQuestion + ", securityAnswer=" + securityAnswer + ", phoneNumber="
+				+ phoneNumber + "]";
 	}
 	
 }
