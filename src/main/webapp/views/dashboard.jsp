@@ -9,5 +9,11 @@
 <body>
 	Welcome ${user}
 	
+	<form action="deleteUser" method="post">
+		<input type="hidden" value="${user.email}" name="email">
+		<input type="submit" value="Delete User">
+	</form>
+
+	
 </body>
 </html>

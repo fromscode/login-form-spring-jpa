@@ -36,10 +36,11 @@ public class HomeController {
 	
 	@PostMapping("verifyLogin")
 	public String verifyLogin(@RequestParam String email, @RequestParam String password, Model m) {
-		User user = repo.getReferenceById(email);
+		Optional<User> optionalUser = repo.findById(email);
 		
-		if(user.getPassword().equals(password)) {
-			m.addAttribute("user", user);
+		
+		if(optionalUser.isPresent() && optionalUser.get().getPassword().equals(password)) {
+			m.addAttribute("user", optionalUser.get());
 			return "dashboard";
 		}
 		return "failure";
@@ -49,7 +50,7 @@ public class HomeController {
 	public String addUser(@ModelAttribute User user, Model m) {
 		
 		if (!user.getPassword().equals(user.getConfirmPassword())) {
-			return "passwordNotMatch";
+			return "passwordNotEqual";
 		}
 		
 		m.addAttribute("user", repo.save(user));
@@ -97,5 +98,13 @@ public class HomeController {
 		m.addAttribute("user", repo.save(user));
 		
 		return "dashboard";
+	}
+	
+	@PostMapping("deleteUser")
+	public String deleteUser(@RequestParam String email, Model m) {
+		
+		repo.deleteById(email);
+		
+		return "index";
 	}
 }
